@@ -31,7 +31,7 @@
 
 + (NSString *)preferencesDir {
     NSString *libraryDir = [self libraryDir];
-    return [libraryDir stringByAppendingPathComponent:@"Preferences"];    
+    return [libraryDir stringByAppendingPathComponent:@"Preferences"];
 }
 
 + (NSString *)cachesDir {
@@ -192,7 +192,7 @@
 
 + (BOOL)clearCachesDirectory {
     NSArray *subFiles = [self listFilesInCachesDirectoryByDeep:NO];
-    BOOL isSuccess;
+    BOOL isSuccess = false;
     
     for (NSString *file in subFiles) {
         NSString *absolutePath = [[self cachesDir] stringByAppendingPathComponent:file];
@@ -203,7 +203,7 @@
 
 + (BOOL)clearTmpDirectory {
     NSArray *subFiles = [self listFilesInTmpDirectoryByDeep:NO];
-    BOOL isSuccess;
+    BOOL isSuccess = false;
     
     for (NSString *file in subFiles) {
         NSString *absolutePath = [[self tmpDir] stringByAppendingPathComponent:file];
@@ -285,7 +285,7 @@
             return YES;
         }
     }
-
+    
     // 移动文件
     BOOL isSuccess = [[NSFileManager defaultManager] moveItemAtPath:path toPath:toPath error:error];
     

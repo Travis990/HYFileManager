@@ -192,7 +192,7 @@
 
 + (BOOL)clearCachesDirectory {
     NSArray *subFiles = [self listFilesInCachesDirectoryByDeep:NO];
-    BOOL isSuccess = false;
+    BOOL isSuccess = YES;
     
     for (NSString *file in subFiles) {
         NSString *absolutePath = [[self cachesDir] stringByAppendingPathComponent:file];
@@ -203,7 +203,7 @@
 
 + (BOOL)clearTmpDirectory {
     NSArray *subFiles = [self listFilesInTmpDirectoryByDeep:NO];
-    BOOL isSuccess = false;
+    BOOL isSuccess = YES;
     
     for (NSString *file in subFiles) {
         NSString *absolutePath = [[self tmpDir] stringByAppendingPathComponent:file];

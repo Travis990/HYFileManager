@@ -196,7 +196,11 @@
     
     for (NSString *file in subFiles) {
         NSString *absolutePath = [[self cachesDir] stringByAppendingPathComponent:file];
-        isSuccess &= [self removeItemAtPath:absolutePath];
+        if ([self removeItemAtPath:absolutePath]) {
+            isSuccess = YES;
+        }else {
+            isSuccess = NO;
+        }
     }
     return isSuccess;
 }
@@ -207,7 +211,11 @@
     
     for (NSString *file in subFiles) {
         NSString *absolutePath = [[self tmpDir] stringByAppendingPathComponent:file];
-        isSuccess &= [self removeItemAtPath:absolutePath];
+        if ([self removeItemAtPath:absolutePath]) {
+            isSuccess = YES;
+        }else {
+            isSuccess = NO;
+        }
     }
     return isSuccess;
 }

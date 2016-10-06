@@ -1,4 +1,4 @@
-# HYFileManager ![Pod version](http://img.shields.io/cocoapods/v/FCFileManager.svg) ![Pod platforms](http://img.shields.io/cocoapods/p/FCFileManager.svg) ![Pod license](http://img.shields.io/cocoapods/l/FCFileManager.svg)
+# HYFileManager ![Pod version](http://img.shields.io/cocoapods/v/HYFileManager.svg) ![Pod platforms](http://img.shields.io/cocoapods/p/HYFileManager.svg) ![Pod license](http://img.shields.io/cocoapods/l/HYFileManager.svg)
 
 ### 简单实用的iOS文件工具类
 

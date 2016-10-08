@@ -226,7 +226,11 @@ All shortcuts suppported:
 + (BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content error:(NSError **)error;
 */
 
+<<<<<<< HEAD
 // write content
+=======
+// 写入文件内容
+>>>>>>> origin/master
 NSError *error;
 NSString *path = [NSString stringWithFormat:@"%@/test/hyyy/file.md", [HYFileManager libraryDir]];
 BOOL isSuccess = [HYFileManager writeFileAtPath:path content:@"Hello World" error:error];

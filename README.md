@@ -1,41 +1,40 @@
-# HYFileManager ![Pod version](http://img.shields.io/cocoapods/v/FCFileManager.svg) ![Pod platforms](http://img.shields.io/cocoapods/p/FCFileManager.svg) ![Pod license](http://img.shields.io/cocoapods/l/FCFileManager.svg)
+# HYFileManager ![Pod version](http://img.shields.io/cocoapods/v/HYFileManager.svg) ![Pod platforms](http://img.shields.io/cocoapods/p/HYFileManager.svg) ![Pod license](http://img.shields.io/cocoapods/l/HYFileManager.svg)
 
-### 简单实用的iOS文件工具类
+### A Simple And Practical Tools Of iOS File Operations
 
-HYFileManager一个基于NSFileManager的文件操作类，它提供一系列的静态方法，只用少量的代码，来处理经常需要处理的文件操作，使得工作更加方便快捷。
-
-### 要求
+HYFileManager is a simple tool of iOS file operations base on NSFileManager. It offers a range of static methods, only a small amount of code to handle file operations often need to deal with, making work easier and faster.
+### Requirements
 - iOS >= 5.0
-- ARC环境
+- ARC enabled
 
-### 特性
+### Features
+- operate sandbox directory, use a simple syntax can be operated sandbox directory;
+- traverse folder, based on deep values, and access the list of subdirectories;
+- Get the file attributes, Including a list of all the attributes or a single attribute;
+- Create a file, including the creation of folders, you can also choose whether content or overwrite parameters;
+- Delete file, including deleted folder, two new static methods, you can clear the caches and tmp folders
+- Copy and move file, including folder, you can easily move and copy the file;
+- Get the filename and extension type;
+- Determine whether a file exists, whether the file is empty, and whether the file is readable and writable;
+- Get file size，include folder size, and provide two ways to return;
+- Write to the file contents, support for basic data types, NSData, UIImage and NSCoding.
 
-- 沙盒日常操作目录集合，简单语法即可获取目录路径；
-- 遍历文件夹，包含两种方式，深遍历和浅遍历；
-- 获取文件属性，包含单个属性获取方法和所有属性获取方法；
-- 创建文件(夹)，创建文件夹，文件，可以根据所需，是否需要覆盖，是否需要默认内容来创建；
-- 删除文件(夹)，提供两个静态方法来快速实现清空Caches和tmp文件夹内容；
-- 复制、移动文件(夹)，可以选择是否需要覆盖来对文件(夹)进行复制和移动；
-- 根据目录路径来获取文件名和文件扩展类型；
-- 判断文件(夹)是否存在、文件(夹)判空、判断路径是否为文件或者文件夹、已经判断目录是否可读可写；
-- 获取文件(夹)的大小，提供两种返回方式，NSNumber和NSString，方便开发使用；
-- 写入文件内容，支持基本数据类型、NSData、UIImage和NSCoding类型。
+See [HYFileManager.h](https://github.com/castial/HYFileManager/HYFileManager/HYFileManager.h), and get detailed methodology description.
 
-查看 [HYFileManager.h](https://github.com/castial/HYFileManager/HYFileManager/HYFileManager.h)，获取方法详细介绍。
-
-### 安装
+### Installation
 
 #### CocoaPods:
 
 `pod 'FCFileManager'`
 
-#### 下载HYFileManager:
+#### Manual install:
 
-下载HYFileManager，将HYFileManager拖动到你的使用工程中即可。
+Copy `FCFileManager.h` and `FCFileManager.m` to your project.
 
-### 使用实例
+### Usage examples
 
-#### 常见沙盒目录
+#### Common sandbox directory
+
 ```
 /*
 All shortcuts suppported:
@@ -48,10 +47,12 @@ All shortcuts suppported:
 + (NSString *)tmpDir;
 */
 
-// 沙盒目录
+// home path
 NSString *homePath = [HYFileManager homeDir];
 ```
-#### 遍历文件夹
+
+#### Traverse folder
+
 ```
 /*
 All shortcuts suppported:
@@ -64,10 +65,10 @@ All shortcuts suppported:
 + (NSArray *)listFilesInTmpDirectoryByDeep:(BOOL)deep;
 */
 
-// 遍历library文件夹
+// Traverse library folder
 NSArray *libraryArr = [HYFileManager listFilesInLibraryDirectoryByDeep:NO];
 ```
-#### 获取文件属性
+#### Get the file attributes
 ```
 /*
 All shortcuts suppported:
@@ -78,10 +79,10 @@ All shortcuts suppported:
 + (NSDictionary *)attributesOfItemAtPath:(NSString *)path error:(NSError **)error;
 */
 
-// 获取文件创建时间
+// Get the file creation date
 NSDate *date = (NSDate *)[HYFileManager attributeOfItemAtPath:path forKey:NSFileCreationDate error:error];
 ```
-#### 创建文件(夹)
+#### Create file or folder
 ```
 /*
 All shortcuts suppported:
@@ -102,11 +103,11 @@ All shortcuts suppported:
 + (NSDate *)modificationDateOfItemAtPath:(NSString *)path error:(NSError **)error;
 */
 
-// library下创建一个test文件夹
+// In the library folder, create a folder named test.
 NSString *directoryPath = [NSString stringWithFormat:@"%@/test", [HYFileManager libraryDir]];
 BOOL isSuccess = [HYFileManager createDirectoryAtPath:directoryPath];
 ```
-#### 删除文件(夹)
+#### Delete file or folder
 ```
 /*
 All shortcuts suppported:
@@ -117,11 +118,11 @@ All shortcuts suppported:
 + (BOOL)clearTmpDirectory;
 */
 
-// 删除library下的test文件夹
+// In the library folder, delete a folder named test.
 NSString *directoryPath = [NSString stringWithFormat:@"%@/test", [HYFileManager libraryDir]];
 BOOL isSuccess = [HYFileManager removeItemAtPath:directoryPath];
 ```
-#### 复制文件(夹)
+#### Copy file or folder
 ```
 /*
 All shortcuts suppported:
@@ -132,13 +133,13 @@ All shortcuts suppported:
 + (BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error;
 */
 
-// 复制文件夹
+// copy folder
 NSError *error;
 NSString *path = [NSString stringWithFormat:@"%@/test/hyyy", [HYFileManager libraryDir]];
 NSString *toPath = [NSString stringWithFormat:@"%@/hyyy", [HYFileManager libraryDir]];
 BOOL isSuccess = [HYFileManager copyItemAtPath:path toPath:toPath overwrite:YES error:&error];
 ```
-#### 移动文件(夹)
+#### Move file or folder
 ```
 /*
 All shortcuts suppported:
@@ -149,13 +150,13 @@ All shortcuts suppported:
 + (BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error;
 */
 
-// 移动文件夹
+// move folder
 NSError *error;
 NSString *path = [NSString stringWithFormat:@"%@/hyyy", [HYFileManager libraryDir]];
 NSString *toPath = [NSString stringWithFormat:@"%@/test/hyyy", [HYFileManager libraryDir]];
 BOOL isSuccess = [HYFileManager moveItemAtPath:path toPath:toPath overwrite:YES error:&error];
 ```
-#### 获取文件名和扩展类型
+#### Get the filename and extension type
 ```
 /*
 All shortcuts suppported:
@@ -166,11 +167,11 @@ All shortcuts suppported:
 
 */
 
-// 获取文件夹名称，带后缀
+// get the filename, including suffix.
 NSString *path = [NSString stringWithFormat:@"%@/test/hyyy/file.md", [HYFileManager libraryDir]];
 NSString *fileName = [HYFileManager fileNameAtPath:path suffix:YES];
 ```
-#### 文件(夹)是否存在、判空和可读可写
+#### Determine whether a file exists
 ```
 /*
 All shortcuts suppported:
@@ -187,11 +188,11 @@ All shortcuts suppported:
 + (BOOL)isWritableItemAtPath:(NSString *)path;
 */
 
-// 判断目录是否存在
+// whether a file exists
 NSString *path = [NSString stringWithFormat:@"%@/test/hyyy/file.md", [HYFileManager libraryDir]];
 BOOL isExist = [HYFileManager isExistsAtPath:path];
 ```
-#### 获取文件(夹)大小
+#### Get file size
 ```
 /*
 All shortcuts suppported:
@@ -211,12 +212,12 @@ All shortcuts suppported:
 + (NSString *)sizeFormattedOfDirectoryAtPath:(NSString *)path error:(NSError **)error;
 */
 
-// 获取文件大小
+// get file size.
 NSError *error;
 NSString *path = [NSString stringWithFormat:@"%@/test/hyyy/file.md", [HYFileManager libraryDir]];
 NSNumber *size = [HYFileManager sizeOfFileAtPath:path error:&error];
 ```
-#### 写入文件内容
+#### Write to the file contents
 ```
 /*
 All shortcuts suppported:
@@ -225,7 +226,7 @@ All shortcuts suppported:
 + (BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content error:(NSError **)error;
 */
 
-// 遍历library文件夹
+// write content
 NSError *error;
 NSString *path = [NSString stringWithFormat:@"%@/test/hyyy/file.md", [HYFileManager libraryDir]];
 BOOL isSuccess = [HYFileManager writeFileAtPath:path content:@"Hello World" error:error];
